@@ -1,9 +1,8 @@
-# ToyBox Manager 🧸
+# ToyBox Manager 🪁
 
 ✨ Un gestor de inventario de juguetes moderno y completo, desarrollado como una aplicación web full-stack. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) de forma intuitiva y eficiente.
 
-![ToyBox Manager Demo](https://i.imgur.com/uGfW7kL.png)
-*(Te recomiendo subir una captura de tu proyecto y reemplazar esta URL)*
+<img width="1867" height="861" alt="Captura de pantalla 2025-09-17 005813" src="https://github.com/user-attachments/assets/78cd0a02-7844-4496-a538-5ffc151d388c" />
 
 ---
 
@@ -43,7 +42,7 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone [https://github.com/tu-usuario/toybox-manager.git](https://github.com/tu-usuario/toybox-manager.git)
+    git clone https://github.com/alexisss13/Semana-05-PC01-node.git
     ```
 
 2.  **Navega al directorio del proyecto:**

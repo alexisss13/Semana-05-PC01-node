@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToyBox Manager</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="icon" href="/logo.png"/>
+  </head>
+  <body>
+    <div class="toast-container position-fixed top-0 end-0 p-3"></div>
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><i class="bi bi-box2-heart-fill"></i> ToyBox Manager</a
+        >
+        <div class="dark-mode-toggle ms-auto">
+          <i class="bi bi-moon-stars-fill"></i>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="darkModeToggle"
+            />
+          </div>
+          <i class="bi bi-sun-fill"></i>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-5">
+      <section class="row g-4 mb-5" id="stats-deck">
+        <div class="col-md-6 col-xl-3">
+          <div class="stat-card">
+            <div class="icon"><i class="bi bi-box-seam"></i></div>
+            <div>
+              <h5>Total Juguetes</h5>
+              <span class="value" id="total-juguetes">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="stat-card">
+            <div class="icon"><i class="bi bi-stack"></i></div>
+            <div>
+              <h5>Stock Total</h5>
+              <span class="value" id="total-stock">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="stat-card">
+            <div class="icon"><i class="bi bi-cash-coin"></i></div>
+            <div>
+              <h5>Valor Inventario</h5>
+              <span class="value" id="valor-inventario">$0</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="stat-card">
+            <div class="icon"><i class="bi bi-tags"></i></div>
+            <div>
+              <h5>Categoría Top</h5>
+              <span class="value" id="top-categoria">-</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header" id="form-title">
+              <i class="bi bi-plus-circle-fill"></i> Añadir Nuevo Juguete
+            </div>
+            <div class="card-body p-4">
+              <form id="toyForm">
+                <input type="hidden" id="toyId" />
+                <div class="mb-3">
+                  <label for="nombre" class="form-label"
+                    >Nombre del Juguete</label
+                  ><input
+                    type="text"
+                    id="nombre"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="descripcion" class="form-label">Descripción</label
+                  ><textarea
+                    id="descripcion"
+                    class="form-control"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="precio" class="form-label">Precio ($)</label
+                    ><input
+                      type="text"
+                      id="precio"
+                      class="form-control"
+                      required
+                      pattern="^\d+(\.\d{1,2})?$"
+                      title="Número válido"
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="stock" class="form-label">Stock</label
+                    ><input
+                      type="number"
+                      id="stock"
+                      class="form-control"
+                      required
+                      min="0"
+                    />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="categoria" class="form-label">Categoría</label
+                  ><select id="categoria" class="form-select" required>
+                    <option value="" disabled selected>
+                      Selecciona una categoría
+                    </option>
+                    <option value="Peluches">Peluches</option>
+                    <option value="Juegos de mesa">Juegos de mesa</option>
+                    <option value="Vehículos">Vehículos</option>
+                    <option value="Figuras de acción">Figuras de acción</option>
+                  </select>
+                </div>
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary" id="submit-btn">
+                    <i class="bi bi-check-circle-fill"></i> Guardar Juguete</button
+                  ><button
+                    type="button"
+                    class="btn btn-secondary d-none"
+                    id="cancel-edit-btn"
+                  >
+                    <i class="bi bi-x-circle"></i> Cancelar Edición
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-header">
+              <i class="bi bi-list-ul"></i> Lista de Juguetes
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle" id="toyTable">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Categoría</th>
+                      <th>Precio</th>
+                      <th>Stock</th>
+                      <th class="text-end">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <nav
+                id="pagination-controls"
+                class="d-flex justify-content-between align-items-center mt-3"
+              ></nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/scripts.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          // --- INICIALIZACIÓN DE DATOS Y LÓGICA CRUD ---
+
+          // Inicializa la variable global 'allToys' con datos del servidor
+          // Esta línea asume que en tu ruta de Express haces: res.render('index', { toys: [...] });
+          allToys = <%- JSON.stringify(toys || []) %>;
+
+          let editMode = false;
+
+          // Selectores para elementos del CRUD
+          const toyForm = document.getElementById('toyForm');
+          const toyIdField = document.getElementById('toyId');
+          const formTitle = document.getElementById('form-title');
+          const submitBtn = document.getElementById('submit-btn');
+          const cancelEditBtn = document.getElementById('cancel-edit-btn');
+          const tableBodyForEvents = document.querySelector('#toyTable tbody');
+
+          const resetForm = () => {
+              toyForm.reset();
+              toyIdField.value = '';
+              editMode = false;
+              formTitle.innerHTML = '<i class="bi bi-plus-circle-fill"></i> Añadir Nuevo Juguete';
+              submitBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Guardar Juguete';
+              submitBtn.disabled = false;
+              submitBtn.classList.replace('btn-success', 'btn-primary');
+              cancelEditBtn.classList.add('d-none');
+              document.getElementById('nombre').focus();
+          };
+
+          // Manejador del envío del formulario
+          toyForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              submitBtn.disabled = true;
+              const originalBtnContent = submitBtn.innerHTML;
+              submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Procesando...`;
+
+              const toyData = {
+                  nombre: document.getElementById('nombre').value.trim(),
+                  descripcion: document.getElementById('descripcion').value.trim(),
+                  precio: parseFloat(document.getElementById('precio').value),
+                  stock: parseInt(document.getElementById('stock').value),
+                  categoria: document.getElementById('categoria').value,
+              };
+
+              const url = editMode ? `/productos/${toyIdField.value}` : '/productos';
+              const method = editMode ? 'PUT' : 'POST';
+
+              try {
+                  const res = await fetch(url, {method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(toyData)});
+                  const responseData = await res.json();
+
+                  if (!res.ok) throw new Error(responseData.message || 'Error en el servidor');
+                  const updatedToy = responseData.data || responseData; // si viene { success, data } o directamente
+
+                  if (editMode) {
+                  const index = allToys.findIndex(t => t._id === updatedToy._id);
+                  if (index !== -1) allToys[index] = updatedToy;
+                  } else {
+                  allToys.push(updatedToy);
+                  }
+
+                  showToast(editMode ? 'Juguete actualizado' : 'Juguete creado');
+                  resetForm();
+                  renderTable(); // Llama a la función de UI para refrescar la vista
+              } catch (error) {
+                  showToast(error.message, 'danger');
+              } finally {
+                  submitBtn.disabled = false;
+                  submitBtn.innerHTML = originalBtnContent;
+              }
+          });
+
+          // Manejador de clics en la tabla (Editar y Eliminar)
+          tableBodyForEvents.addEventListener('click', async (e) => {
+              const editBtn = e.target.closest('.edit-btn');
+              const deleteBtn = e.target.closest('.delete-btn');
+              if (!editBtn && !deleteBtn) return;
+
+              const row = e.target.closest('tr');
+              const id = row.dataset.id;
+
+              if (editBtn) {
+                  const toy = allToys.find(t => t._id === id);
+                  if (!toy) return;
+
+                  toyIdField.value = toy._id;
+                  document.getElementById('nombre').value = toy.nombre;
+                  document.getElementById('descripcion').value = toy.descripcion;
+                  document.getElementById('precio').value = toy.precio;
+                  document.getElementById('stock').value = toy.stock;
+                  document.getElementById('categoria').value = toy.categoria;
+
+                  editMode = true;
+                  formTitle.innerHTML = '<i class="bi bi-pencil-square"></i> Editar Juguete';
+                  submitBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Actualizar Juguete';
+                  submitBtn.classList.replace('btn-primary', 'btn-success');
+                  cancelEditBtn.classList.remove('d-none');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+
+              if (deleteBtn) {
+                  if (confirm('¿Estás seguro de que deseas eliminar este juguete?')) {
+                      try {
+                          const res = await fetch(`/productos/${id}`, { method: 'DELETE' });
+                          if (!res.ok) throw new Error('Error al eliminar');
+
+                          allToys = allToys.filter(t => t._id !== id);
+                          showToast('Juguete eliminado', 'success');
+                          renderTable(); // Refresca la UI
+                      } catch (error) {
+                          showToast(error.message, 'danger');
+                      }
+                  }
+              }
+          });
+
+          cancelEditBtn.addEventListener('click', resetForm);
+
+          // Renderizado inicial al cargar la página
+          renderTable();
+      });
+    </script>
+  </body>
+</html>

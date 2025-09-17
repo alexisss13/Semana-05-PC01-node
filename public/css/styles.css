@@ -1,0 +1,195 @@
+:root {
+  --primary-color: #6a5acd; /* Un color púrpura moderno */
+  --primary-hover: #5a4bbf;
+  --secondary-color: #6c757d;
+  --success-color: #198754;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --font-family: 'Poppins', sans-serif;
+  --border-radius: 0.75rem;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --body-bg: #f4f7fc;
+  --card-bg: #ffffff;
+  --text-color: #2c3e50;
+  --text-muted: #8492a6;
+  --border-color: #e0e6ed;
+}
+
+/* --- MODO OSCURO --- */
+body.dark-mode {
+  --primary-color: #7b68ee;
+  --primary-hover: #6a5acd;
+  --body-bg: #161a25;
+  --card-bg: #1e2230;
+  --text-color: #e0e6ed;
+  --text-muted: #8492a6;
+  --border-color: #2c3245;
+}
+/* --- --- */
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Navbar y Header */
+.navbar {
+  background-color: var(--card-bg) !important;
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease;
+}
+.navbar-brand {
+  font-weight: 700;
+  color: var(--primary-color) !important;
+}
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+.form-check-input:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Tarjetas de Estadísticas */
+.stat-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.stat-card .icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+  padding: 0.8rem;
+  background-color: rgba(106, 90, 205, 0.1);
+  border-radius: 50%;
+}
+.stat-card h5 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.stat-card .value {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+/* Tarjetas Principales (Formulario y Tabla) */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+.card-header {
+  background-color: transparent;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 1rem 1.5rem;
+  color: var(--text-color);
+}
+
+/* Formularios y Botones */
+.form-label {
+  color: var(--text-color);
+}
+.form-control,
+.form-select {
+  background-color: var(--body-bg);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(106, 90, 205, 0.25);
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+/* Tabla y Paginación */
+.table {
+  --bs-table-bg: var(--card-bg);
+  --bs-table-border-color: var(--border-color);
+  --bs-table-color: var(--text-color);
+  --bs-table-hover-bg: rgba(106, 90, 205, 0.07);
+}
+.table th {
+  color: var(--text-muted);
+}
+/* CORRECCIÓN: Asegura que el texto 'muted' use nuestra variable de color */
+.table .text-muted {
+  color: var(--text-muted) !important;
+}
+#pagination-controls .form-select-sm {
+  width: auto;
+}
+#pagination-controls .page-link {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--primary-color);
+}
+#pagination-controls .page-link:hover {
+  background-color: var(--body-bg);
+}
+#pagination-controls .page-item.disabled .page-link {
+  background-color: transparent;
+  border-color: var(--border-color);
+  color: var(--text-muted);
+}
+
+/* Estado Vacío */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+}
+.empty-state svg {
+  max-width: 150px;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.table tbody tr {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+.row-fade-out {
+  transition: opacity 0.4s ease-out;
+  opacity: 0 !important;
+}

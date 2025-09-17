@@ -1,8 +1,7 @@
 # ToyBox Manager 🪁
 
 ✨ Un gestor de inventario de juguetes moderno y completo, desarrollado como una aplicación web full-stack. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) de forma intuitiva y eficiente.
-
-<img width="1867" height="861" alt="Captura de pantalla 2025-09-17 005813" src="https://github.com/user-attachments/assets/78cd0a02-7844-4496-a538-5ffc151d388c" />
+![pc01gif](https://github.com/user-attachments/assets/b757b50d-b396-411d-876c-5934fd4f86bc)
 
 ---
 

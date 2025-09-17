@@ -1,6 +1,7 @@
 # ToyBox Manager 🪁
 
 ✨ Un gestor de inventario de juguetes moderno y completo, desarrollado como una aplicación web full-stack. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) de forma intuitiva y eficiente.
+
 ![pc01gif](https://github.com/user-attachments/assets/b757b50d-b396-411d-876c-5934fd4f86bc)
 
 ---
@@ -46,7 +47,7 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
 2.  **Navega al directorio del proyecto:**
     ```bash
-    cd toybox-manager
+    cd Semana-05-PC01-node
     ```
 
 3.  **Instala las dependencias:**
